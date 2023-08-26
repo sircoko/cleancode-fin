@@ -1,3 +1,3 @@
-export * from './categories.entity';
-export * from './movements.entity';
+export * from './categorie.entity';
+export * from './movement.entity';
 export * from './user.entity';
