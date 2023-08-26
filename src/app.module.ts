@@ -2,14 +2,17 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DataServicesModule } from './services';
 import { UserUseCasesModule } from './use-cases/user/user-use-cases.module';
-import { AppController, UserController } from './controllers';
+import {
+  AppController,
+  MovementController,
+  UserController,
+} from './controllers';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './frameworks/data-services/typeORM/model';
+import { Movement, User } from './frameworks/data-services/typeORM/model';
+import { MovementUseCasesModule } from './use-cases/movement/movement-use-cases.module';
 
 @Module({
   imports: [
-    DataServicesModule,
-    UserUseCasesModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -20,11 +23,14 @@ import { User } from './frameworks/data-services/typeORM/model';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [User],
+      entities: [User, Movement],
       synchronize: true,
     }),
+    DataServicesModule,
+    UserUseCasesModule,
+    MovementUseCasesModule,
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController, UserController, MovementController],
   providers: [],
 })
 export class AppModule {}

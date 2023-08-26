@@ -6,19 +6,13 @@ export class Movement {
   id: number;
 
   @Column()
-  firstname: string;
+  concept: string;
 
   @Column()
-  lastname: string;
+  date: Date;
 
   @Column()
-  username: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  password: string;
+  amount: number;
 }
 
 export const MovementSchema = new EntitySchema<Movement>({
@@ -30,20 +24,14 @@ export const MovementSchema = new EntitySchema<Movement>({
       primary: true,
       generated: true,
     },
-    firstname: {
+    concept: {
       type: String,
     },
-    lastname: {
-      type: String,
+    date: {
+      type: Date,
     },
-    username: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-    password: {
-      type: String,
+    amount: {
+      type: Number,
     },
   },
 });

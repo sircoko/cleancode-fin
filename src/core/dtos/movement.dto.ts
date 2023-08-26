@@ -8,11 +8,11 @@ export class CreateMovementDto {
 
   @IsDate()
   @IsNotEmpty()
-  date: string;
+  date: Date;
 
   @IsNumber()
   @IsNotEmpty()
-  amount: string;
+  amount: number;
 }
 
 export class UpdateMovementDto extends PartialType(CreateMovementDto) {}
