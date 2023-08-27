@@ -19,17 +19,17 @@ export class MovementController {
   }
 
   @Post()
-  async createUser(@Body() userDto: CreateMovementDto) {
-    console.log('[MovementController:Post]', userDto);
-    return this.movementUseCases.createMovement(userDto);
+  async createMovement(@Body() movementDto: CreateMovementDto) {
+    console.log('[MovementController:Post]', movementDto);
+    return this.movementUseCases.createMovement(movementDto);
   }
 
   @Put(':id')
-  async updateUser(
-    @Param('id') userId: string,
-    @Body() updateUserDto: UpdateMovementDto,
+  async updateMovement(
+    @Param('id') movementId: string,
+    @Body() updateMovementDto: UpdateMovementDto,
   ) {
-    console.log('[MovementController:Put]', userId, updateUserDto);
-    return this.movementUseCases.updateMovement(userId, updateUserDto);
+    console.log('[MovementController:Put]', movementId, updateMovementDto);
+    return this.movementUseCases.updateMovement(movementId, updateMovementDto);
   }
 }
