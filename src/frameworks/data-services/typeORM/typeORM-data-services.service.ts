@@ -18,11 +18,18 @@ export class TypeOrmDataServices
     private UsersRepository: Repository<User>,
     @InjectRepository(Movement)
     private MovementsRepository: Repository<Movement>,
+    @InjectRepository(Category)
+    private CategoryRepository: Repository<Category>,
   ) {}
 
   onApplicationBootstrap() {
     console.log('DataService succesfully initiated...');
     this.users = new TypeOrmGenericRepository<User>(this.UsersRepository);
-    this.movements = new TypeOrmGenericRepository<Movement>(this.MovementsRepository);
+    this.movements = new TypeOrmGenericRepository<Movement>(
+      this.MovementsRepository,
+    );
+    this.categories = new TypeOrmGenericRepository<Category>(
+      this.CategoryRepository,
+    );
   }
 }

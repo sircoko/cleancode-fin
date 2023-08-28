@@ -12,7 +12,8 @@ export class UserUseCases {
   ) {}
 
   getAllUsers(): Promise<User[]> {
-    return this.dataServices.users.getAll();
+    const relations = ['movements'];
+    return this.dataServices.users.getAll(relations);
   }
 
   getUserById(id: any): Promise<User> {

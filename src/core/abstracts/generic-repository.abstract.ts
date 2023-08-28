@@ -1,5 +1,5 @@
 export abstract class IGenericRepository<T> {
-  abstract getAll(): Promise<T[]>;
+  abstract getAll(relations?): Promise<T[]>;
 
   abstract get(id: string): Promise<T>;
 

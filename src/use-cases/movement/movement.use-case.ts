@@ -15,7 +15,9 @@ export class MovementUseCases {
   ) {}
 
   getAllMovements(): Promise<Movement[]> {
-    return this.dataServices.movements.getAll();
+    const conditions = [];
+    const relations = ['user', 'category'];
+    return this.dataServices.movements.getAll(relations);
   }
 
   getMovementrById(id: any): Promise<Movement> {
@@ -25,6 +27,12 @@ export class MovementUseCases {
   createMovement(createMovementDto: CreateMovementDto): Promise<Movement> {
     const movement =
       this.movementFactoryService.createNewMovement(createMovementDto);
+    console.log(
+      '[MovementUseCase:createMovement]',
+      createMovementDto,
+      movement,
+    );
+
     return this.dataServices.movements.create(movement);
   }
 

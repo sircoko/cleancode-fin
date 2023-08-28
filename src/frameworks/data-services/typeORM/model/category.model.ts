@@ -1,4 +1,11 @@
-import { Column, Entity, EntitySchema, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  EntitySchema,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Movement } from './movement.model';
 
 @Entity()
 export class Category {
@@ -6,19 +13,13 @@ export class Category {
   id: number;
 
   @Column()
-  firstname: string;
+  name: string;
 
   @Column()
-  lastname: string;
+  description: string;
 
-  @Column()
-  username: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  password: string;
+  @OneToMany(() => Movement, (movement) => movement.category)
+  movements: Movement[];
 }
 
 export const CategorySchema = new EntitySchema<Category>({
@@ -30,20 +31,17 @@ export const CategorySchema = new EntitySchema<Category>({
       primary: true,
       generated: true,
     },
-    firstname: {
+    name: {
       type: String,
     },
-    lastname: {
+    description: {
       type: String,
     },
-    username: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-    password: {
-      type: String,
+  },
+  relations: {
+    movements: {
+      type: 'one-to-many',
+      target: 'Movement',
     },
   },
 });

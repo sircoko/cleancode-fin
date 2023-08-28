@@ -13,6 +13,14 @@ export class CreateMovementDto {
   @IsNumber()
   @IsNotEmpty()
   amount: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  user: any;
+
+  @IsNumber()
+  @IsNotEmpty()
+  category: any;
 }
 
 export class UpdateMovementDto extends PartialType(CreateMovementDto) {}

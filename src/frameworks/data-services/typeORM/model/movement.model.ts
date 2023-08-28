@@ -1,4 +1,14 @@
-import { Column, Entity, EntitySchema, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  EntitySchema,
+  JoinTable,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from './user.model';
+import { Category } from './category.model';
 
 @Entity()
 export class Movement {
@@ -13,6 +23,12 @@ export class Movement {
 
   @Column()
   amount: number;
+
+  @ManyToOne(() => User, (user) => user.movements)
+  user: User;
+
+  @ManyToOne(() => Category, (category) => category.movements)
+  category: Category;
 }
 
 export const MovementSchema = new EntitySchema<Movement>({
@@ -32,6 +48,16 @@ export const MovementSchema = new EntitySchema<Movement>({
     },
     amount: {
       type: Number,
+    },
+  },
+  relations: {
+    user: {
+      type: 'many-to-one',
+      target: 'User',
+    },
+    category: {
+      type: 'many-to-one',
+      target: 'User',
     },
   },
 });

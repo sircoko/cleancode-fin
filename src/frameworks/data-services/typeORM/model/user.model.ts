@@ -1,4 +1,12 @@
-import { Column, Entity, EntitySchema, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  EntitySchema,
+  JoinTable,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Movement } from './movement.model';
 
 @Entity()
 export class User {
@@ -19,6 +27,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToMany((type) => Movement, (movement) => movement.user)
+  movements: Movement[];
 }
 
 export const UserSchema = new EntitySchema<User>({
@@ -44,6 +55,13 @@ export const UserSchema = new EntitySchema<User>({
     },
     password: {
       type: String,
+    },
+  },
+  relations: {
+    movements: {
+      type: 'one-to-many',
+      target: 'Movement',
+      eager: true,
     },
   },
 });

@@ -12,6 +12,8 @@ export class MovementFactoryService {
     newMovement.amount = createMovementDto.amount;
     newMovement.concept = createMovementDto.concept;
     newMovement.date = createMovementDto.date;
+    newMovement.user = createMovementDto.user;
+    newMovement.category = createMovementDto.category;
     return newMovement;
   }
   updateMovement(updateMovementDto: UpdateMovementDto) {
@@ -19,6 +21,8 @@ export class MovementFactoryService {
     newMovement.amount = updateMovementDto.amount;
     newMovement.concept = updateMovementDto.concept;
     newMovement.date = updateMovementDto.date;
+    newMovement.user = updateMovementDto.user;
+    newMovement.category = updateMovementDto.category;
     return newMovement;
   }
 }

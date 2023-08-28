@@ -7,13 +7,14 @@ export class TypeOrmGenericRepository<T> implements IGenericRepository<T> {
     this._repository = repository;
   }
 
-  getAll(): Promise<T[]> {
-    return this._repository.find();
+  getAll(relations?): Promise<T[]> {
+    return this._repository.find({ relations });
   }
   get(id: any): Promise<T | null> {
     return this._repository.findOneBy({ id } as FindOptionsWhere<T>);
   }
   create(item: T): Promise<T> {
+    console.log('[TypeORMRepository:Create]: ', item);
     return this._repository.save(item);
   }
   update(id: any, item: T): Promise<T> {
