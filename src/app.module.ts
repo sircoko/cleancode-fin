@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DataServicesModule } from './services';
@@ -16,9 +17,16 @@ import {
 } from './frameworks/data-services/typeORM/model';
 import { MovementUseCasesModule } from './use-cases/movement/movement-use-cases.module';
 import { CategoryUseCasesModule } from './use-cases/category';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { HelloWorldModule } from './hello-world/hello-world.module';
 
 @Module({
   imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -36,6 +44,7 @@ import { CategoryUseCasesModule } from './use-cases/category';
     UserUseCasesModule,
     MovementUseCasesModule,
     CategoryUseCasesModule,
+    HelloWorldModule,
   ],
   controllers: [
     AppController,
