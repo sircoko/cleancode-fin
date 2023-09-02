@@ -71,7 +71,7 @@ describe('UserUseCases', () => {
       expect(service).toBeDefined;
     });
 
-    it('should get all users', async () => {
+    it('should get all users', async () => { 
       const result = await service.getAllUsers();
       jest
         .spyOn(mockDataServices.users, 'getAll')
