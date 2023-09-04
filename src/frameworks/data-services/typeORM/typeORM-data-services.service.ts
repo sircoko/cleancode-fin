@@ -3,7 +3,7 @@ import { TypeOrmGenericRepository } from './typeORM-generic-repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IDataServices } from 'src/core';
 import { Repository } from 'typeorm';
-import { Category, Movement, User } from './model';
+import { Budget, Category, Movement, User } from './model';
 
 @Injectable()
 export class TypeOrmDataServices
@@ -12,6 +12,7 @@ export class TypeOrmDataServices
   categories: TypeOrmGenericRepository<Category>;
   movements: TypeOrmGenericRepository<Movement>;
   users: TypeOrmGenericRepository<User>;
+  budgets: TypeOrmGenericRepository<Budget>;
 
   constructor(
     @InjectRepository(User)
@@ -20,6 +21,8 @@ export class TypeOrmDataServices
     private MovementsRepository: Repository<Movement>,
     @InjectRepository(Category)
     private CategoryRepository: Repository<Category>,
+    @InjectRepository(Budget)
+    private BudgetRepository: Repository<Budget>,
   ) {}
 
   onApplicationBootstrap() {
@@ -31,5 +34,6 @@ export class TypeOrmDataServices
     this.categories = new TypeOrmGenericRepository<Category>(
       this.CategoryRepository,
     );
+    this.budgets = new TypeOrmGenericRepository<Budget>(this.BudgetRepository);
   }
 }

@@ -1,4 +1,4 @@
-import { Category, Movement, User } from '../entities';
+import { Budget, Category, Movement, User } from '../entities';
 import { IGenericRepository } from './generic-repository.abstract';
 
 export abstract class IDataServices {
@@ -7,4 +7,6 @@ export abstract class IDataServices {
   abstract categories: IGenericRepository<Category>;
 
   abstract movements: IGenericRepository<Movement>;
+
+  abstract budgets: IGenericRepository<Budget>;
 }

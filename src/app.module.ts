@@ -11,6 +11,7 @@ import {
 } from './controllers';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
+  Budget,
   Category,
   Movement,
   User,
@@ -20,6 +21,8 @@ import { CategoryUseCasesModule } from './use-cases/category';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { HelloWorldModule } from './hello-world/hello-world.module';
+import { BudgetUseCasesModule } from './use-cases/budget/budget-use-cases.module';
+import { BudgetController } from './controllers/budget.controller';
 
 @Module({
   imports: [
@@ -37,13 +40,14 @@ import { HelloWorldModule } from './hello-world/hello-world.module';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [User, Movement, Category],
+      entities: [User, Movement, Category, Budget],
       synchronize: true,
     }),
     DataServicesModule,
     UserUseCasesModule,
     MovementUseCasesModule,
     CategoryUseCasesModule,
+    BudgetUseCasesModule,
     HelloWorldModule,
   ],
   controllers: [
@@ -51,6 +55,7 @@ import { HelloWorldModule } from './hello-world/hello-world.module';
     UserController,
     MovementController,
     CategoryController,
+    BudgetController,
   ],
   providers: [],
 })
